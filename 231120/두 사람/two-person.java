@@ -9,6 +9,6 @@ public class Main {
         int b_age = sc.nextInt();
         char b_sex = sc.next().charAt(0);
 
-        System.out.println((a_age >= 19 && a_sex == 'M') || (b_age >= 19 && b_sex == 'W') ? 1 : 0);
+        System.out.println(a_age >= 19 && a_sex == 'M' || b_age >= 19 && b_sex == 'M' ? 1 : 0);
     }
 }
