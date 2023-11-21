@@ -7,14 +7,18 @@ public class Main {
         int total = 0, cnt = 0;
 
         while (true) {
-            int age = sc.nextInt();
+            int n;
 
-            if (age < 20 || age > 29)
+            n = sc.nextInt();
+
+            if (n < 20 || n > 29) {
+                System.out.printf("%.2f", (double)total/cnt);
                 break;
-            total += age;
+            }
+
+            total += n;
             cnt++;
         }
 
-        System.out.printf("%.2f", (float)total/cnt);
     }
 }
