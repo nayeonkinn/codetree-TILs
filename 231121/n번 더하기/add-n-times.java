@@ -6,11 +6,8 @@ public class Main {
 
         int a = sc.nextInt();
         int n = sc.nextInt();
-        int i = 0;
 
-        while (i < n) {
+        for (int i = 0; i < n; i++)
             System.out.println(a += n);
-            i++;
-        }
     }
 }
