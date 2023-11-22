@@ -1,12 +1,6 @@
 import java.util.Scanner;
 
 public class Main {
-    static void printStars(int n) {
-        for (int i = 0; i < n; i++)
-            System.out.print("* ");
-        System.out.println();
-    }
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -14,39 +8,14 @@ public class Main {
 
         n = sc.nextInt();
 
-        int i = n, j = 1;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n - i; j++)
+                System.out.print("* ");
+            System.out.println();
 
-        while (i >= j) {
-            printStars(i);
-            
-            if (i == j) {
-                i--;
-                j++;
-                break;
-            }
-
-            printStars(j);
-
-            i--;
-            j++;
-        }
-
-        i++;
-        j--;
-
-        while (i < n + 1 & j > 0) {
-            printStars(j);
-
-            if (i == j) {
-                i++;
-                j--;
-                continue;
-            }
-
-            printStars(i);
-
-            i++;
-            j--;
+            for (int j = 0; j < i + 1; j++)
+                System.out.print("* ");
+            System.out.println();
         }
     }
 }
