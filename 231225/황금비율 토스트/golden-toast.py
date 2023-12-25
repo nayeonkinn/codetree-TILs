@@ -68,10 +68,10 @@ it = dll.end()
 for _ in range(m):
     code, *char = input().split()
 
-    if code == 'L':
+    if code == 'L' and it.prev:
         it = it.prev
 
-    elif code == 'R':
+    elif code == 'R' and it.next:
         it = it.next
 
     elif code == 'D':
