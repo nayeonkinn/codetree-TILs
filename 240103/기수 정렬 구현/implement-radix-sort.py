@@ -1,23 +1,26 @@
+MAX_LEN = 6
+MAX_DIGIT = 10
+
 n = int(input())
-nums = input().split()
+nums = list(map(int, input().split()))
 
-def radix_sort(nums):
-    for i in range(max_len - 1, -1, -1):
-        temp = [[] for _ in range(10)]
+def radix_sort():
+    global nums
 
+    p = 1
+    for pos in range(MAX_LEN):
+        temp = [[] for _ in range(MAX_DIGIT)]
         for num in nums:
-            temp[int(num[i])].append(num)
-                
-        new_nums = []
-        for j in range(10):
-            for k in temp[j]:
-                new_nums.append(k)
+            digit = (num // p) % 10
+            temp[digit].append(num)
 
-        nums = new_nums
-    
-    return list(map(int, nums))
+        nums = []
+        for digit in range(MAX_DIGIT):
+            for num in temp[digit]:
+                nums.append(num)
+        
+        p *= 10
 
-max_len = len(max(nums, key=len))
-nums = ['0' * (max_len - len(num)) + num if len(num) < max_len else num for num in nums]
+radix_sort()
 
-print(*radix_sort(nums))
+print(*nums)
