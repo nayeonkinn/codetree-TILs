@@ -8,6 +8,7 @@ order = []
 
 for _ in range(m):
     a, b = map(int, input().split())
+    edges[a].append(b)
     indegree[b] += 1
 
 for i in range(1, n + 1):
@@ -21,7 +22,7 @@ while q:
     for y in edges[x]:
         indegree[y] -= 1
 
-        if not edges[y]:
+        if not indegree[y]:
             q.append(y)
 
 if n == len(order):
