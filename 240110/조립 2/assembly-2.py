@@ -11,7 +11,7 @@ for _ in range(m):
         indegree[a] += 1
 
 input()
-piece = set(map(int, input().split()))
+piece = list(map(int, input().split()))
 
 q = deque()
 q += piece
@@ -24,7 +24,7 @@ while q:
 
         if not indegree[y] and y not in piece:
             q.append(y)
-            piece.add(y)
+            piece.append(y)
 
 print(len(piece))
 print(*sorted(piece))
