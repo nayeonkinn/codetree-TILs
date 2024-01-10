@@ -29,4 +29,4 @@ while q:
             piece.add(y)
 
 print(len(piece))
-print(*piece)
+print(*sorted(piece))
