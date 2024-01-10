@@ -14,9 +14,7 @@ input()
 piece = set(map(int, input().split()))
 
 q = deque()
-for i in range(1, n + 1):
-    if i in piece:
-        q.append(i)
+q += piece
 
 while q:
     x = q.popleft()
