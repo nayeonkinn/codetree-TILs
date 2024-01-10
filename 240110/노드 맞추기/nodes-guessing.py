@@ -33,4 +33,4 @@ while q:
             child[x].append(y)
 
 for k, v in child.items():
-    print(k, len(v), *v)
+    print(k, len(v), *sorted(v))
