@@ -1,8 +1,11 @@
 from collections import deque
 
 n, m = map(int, input().split())
+
 edges = [[] for _ in range(n + 1)]
 indegree = [0] * (n + 1)
+visited = [False] * (n + 1)
+q = deque()
 
 for _ in range(m):
     a, _ = map(int, input().split())
@@ -11,20 +14,24 @@ for _ in range(m):
         indegree[a] += 1
 
 input()
-piece = list(map(int, input().split()))
 
-q = deque()
-q += piece
+for piece in list(map(int, input().split())):
+    q.append(piece)
+    visited[piece] = True
 
 while q:
     x = q.popleft()
 
     for y in edges[x]:
+        if visited[y]:
+            continue
+
         indegree[y] -= 1
 
-        if not indegree[y] and y not in piece:
+        if not indegree[y]:
             q.append(y)
-            piece.append(y)
+            visited[y] = True
 
-print(len(piece))
-print(*sorted(piece))
+answer = [i for i, v in enumerate(visited) if v]
+print(len(answer))
+print(*answer)
