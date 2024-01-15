@@ -1,6 +1,7 @@
 from collections import deque
 
 n, m1, m2 = map(int, input().split())
+
 edges = [[] for _ in range(n + 1)]
 indegree = [0] * (n + 1)
 q = deque()
@@ -11,12 +12,8 @@ for _ in range(m1):
     edges[a].append(b)
     indegree[b] += 1
 
-# for _ in range(m2):
-#     a, b = map(int, input().split())
-#     edges[a].append(b)
-#     edges[b].append(a)
-#     indegree[a] += 1
-#     indegree[b] += 1
+for _ in range(m2):
+    input()
 
 for i in range(1, n + 1):
     if not indegree[i]:
