@@ -1,9 +1,9 @@
 from collections import deque
 
 def cycle(limit):
-    edges = [[] for _ in range(m + 1)]
-    indegree = [0] * (m + 1)
-    visited = [False] * (m + 1)
+    edges = [[] for _ in range(n + 1)]
+    indegree = [0] * (n + 1)
+    visited = [False] * (n + 1)
 
     q = deque()
     
