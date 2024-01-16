@@ -1,48 +1,56 @@
-from collections import defaultdict, deque
+from collections import deque
 
 n = int(input())
 words = [input() for _ in range(n)]
 
-alpha = set()
+nodes = set()
 for word in words:
-    alpha |= set(word)
+    nodes |= set(word)
 
 q = deque()
-edges = defaultdict(list)
-indegree = defaultdict(int)
 
-order = ''
+edges = {node: [] for node in nodes}
+indegree = {node: 0 for node in nodes}
+visited = {node: False for node in nodes}
 
-cnt = 0
+answer = ''
+is_inf = False
+
 for i in range(n - 1):
     word1, word2 = words[i], words[i + 1]
-    idx = 0
-    while idx < min(len(word1), len(word2)):
-        if (a := word1[idx]) != (b := word2[idx]):
-            edges[a].append(b)
-            indegree[b] += 1
-            cnt += 1
+    j = 0
+    while j < min(len(word1), len(word2)):
+        if (a := word1[j]) != (b := word2[j]):
+            if b not in edges[a]:
+                edges[a].append(b)
+                indegree[b] += 1
             break
         else:
-            idx += 1
+            j += 1
 
-for a in alpha:
-    if not indegree[a]:
-        q.append(a)
+for node in nodes:
+    if not indegree[node]:
+        q.append(node)
 
 while q:
-    a = q.popleft()
-    order += a
+    if len(q) > 1:
+        is_inf = True
 
-    for b in edges[a]:
-        indegree[b] -= 1
+    x = q.popleft()
+    visited[x] = True
+    answer += x
 
-        if not indegree[b]:
-            q.append(b)
+    for y in edges[x]:
+        indegree[y] -= 1
 
-if cnt < len(alpha) - 1:
-    print('inf')
-elif len(order) == len(alpha):
-    print(order)
-else:
+        if not indegree[y]:
+            q.append(y)
+
+is_cycle = not all(visited.values())
+
+if is_cycle:
     print(-1)
+elif is_inf:
+    print('inf')
+else:
+    print(answer)
