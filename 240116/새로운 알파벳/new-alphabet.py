@@ -3,34 +3,32 @@ from collections import deque
 n = int(input())
 words = [input() for _ in range(n)]
 
-nodes = set()
+alpha = set()
 for word in words:
-    nodes |= set(word)
+    alpha |= set(word)
 
 q = deque()
 
-edges = {node: [] for node in nodes}
-indegree = {node: 0 for node in nodes}
-visited = {node: False for node in nodes}
+edges = {x: [] for x in alpha}
+indegree = {x: 0 for x in alpha}
+visited = {x: False for x in alpha}
 
 answer = ''
 is_inf = False
 
 for i in range(n - 1):
-    word1, word2 = words[i], words[i + 1]
-    j = 0
-    while j < min(len(word1), len(word2)):
-        if (a := word1[j]) != (b := word2[j]):
+    for j in range(0, min(len(words[i]), len(words[i + 1]))):
+        a = words[i][j]
+        b = words[i + 1][j]
+        if a != b:
             if b not in edges[a]:
                 edges[a].append(b)
                 indegree[b] += 1
             break
-        else:
-            j += 1
 
-for node in nodes:
-    if not indegree[node]:
-        q.append(node)
+for x in alpha:
+    if not indegree[x]:
+        q.append(x)
 
 while q:
     if len(q) > 1:
