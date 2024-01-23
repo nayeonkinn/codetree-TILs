@@ -9,31 +9,32 @@ edges = [[] for _ in range(n + 1)]
 indegree = [0] * (n + 1)
 
 q = []
-route = []
+answer = [0] * (n + 1)
 
+# outdegree가 0인 노드 중 가장 번호가 큰 노드를 n번째에 매핑 -> 뒤집어서 연산
 for _ in range(m):
     x, y = map(int, input().split())
-    edges[x].append(y)
-    indegree[y] += 1
+    edges[y].append(x)
+    indegree[x] += 1
 
 for i in range(1, n + 1):
     if not indegree[i]:
-        heapq.heappush(q, i)
+        heapq.heappush(q, -i)
 
+cnt = n
 while q:
-    x = heapq.heappop(q)
-    route.append(x)
+    x = -heapq.heappop(q)
+
+    answer[x] = cnt
+    cnt -= 1
 
     for y in edges[x]:
         indegree[y] -= 1
 
         if not indegree[y]:
-            heapq.heappush(q, y)
+            heapq.heappush(q, -y)
 
-if len(route) != n:
-    print(-1)
+if all(answer[1:]):
+    print(*answer[1:])
 else:
-    answer = [0] * n
-    for i, v in enumerate(route):
-        answer[v - 1] = i + 1
-    print(*answer)
+    print(-1)
